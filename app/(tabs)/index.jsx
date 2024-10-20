@@ -52,17 +52,18 @@ export default function Index() {
   };
 
   return (
-    <View
-      style={{
-        marginTop: 0,
-        padding: 20,
-        backgroundColor: Colors.PRIMARY,
-        height: 170,
-      }}
-    >
-      <Header />
+    <View>
+      <View
+        style={{
+          padding: 20,
+          backgroundColor: Colors.PRIMARY,
+          height: 170,
+        }}
+      >
+        <Header />
 
-      <CircularChart />
+        <CircularChart />
+      </View>
     </View>
   );
 }
