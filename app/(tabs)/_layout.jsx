@@ -20,7 +20,7 @@ export default function TabLayout() {
             <FontAwesome size={28} name="home" color={color} />
           ),
           tabBarLabelStyle: {
-            fontFamily: "outfit",
+            fontFamily: "outfit-regular",
           },
         }}
       />
@@ -32,7 +32,7 @@ export default function TabLayout() {
             <FontAwesome name="history" size={28} color={color} />
           ),
           tabBarLabelStyle: {
-            fontFamily: "outfit",
+            fontFamily: "outfit-regular",
           },
         }}
       />
@@ -44,7 +44,7 @@ export default function TabLayout() {
             <FontAwesome name="user" size={28} color={color} />
           ),
           tabBarLabelStyle: {
-            fontFamily: "outfit",
+            fontFamily: "outfit-regular",
           },
         }}
       />

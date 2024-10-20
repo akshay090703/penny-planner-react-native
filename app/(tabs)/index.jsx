@@ -6,6 +6,7 @@ import { supabase } from "../../utils/SuperbaseConfig";
 import Header from "../../components/Header";
 import { Colors } from "@/constants/Colors";
 import CircularChart from "../../components/CircularChart";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default function Index() {
   const router = useRouter();
@@ -64,6 +65,9 @@ export default function Index() {
 
         <CircularChart />
       </View>
+      <View style={styles.addBtnContainer}>
+        <Ionicons name="add-circle" size={64} color={Colors.PRIMARY} />
+      </View>
     </View>
   );
 }
@@ -71,5 +75,10 @@ export default function Index() {
 const styles = StyleSheet.create({
   text: {
     fontSize: 20,
+  },
+  addBtnContainer: {
+    position: "absolute",
+    bottom: 16,
+    right: 16,
   },
 });

@@ -13,13 +13,13 @@ export default function CircularChart() {
       <Text
         style={{
           fontSize: 20,
-          fontFamily: "outfit",
+          fontFamily: "outfit-regular",
         }}
       >
         Total Estimate:{" "}
         <Text
           style={{
-            fontFamily:'outfit-bold',
+            fontFamily: "outfit-bold",
           }}
         >
           Rs.0
