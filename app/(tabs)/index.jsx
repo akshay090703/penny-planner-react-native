@@ -1,15 +1,25 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { useEffect } from "react";
-import { useRouter } from "expo-router";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  RefreshControl,
+} from "react-native";
+import { useEffect, useState } from "react";
+import { Link, useRouter } from "expo-router";
 import { client } from "../../utils/kindeConfig";
 import { supabase } from "../../utils/SuperbaseConfig";
 import Header from "../../components/Header";
 import { Colors } from "@/constants/Colors";
 import CircularChart from "../../components/CircularChart";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import CategoryList from "../../components/CategoryList";
 
 export default function Index() {
   const router = useRouter();
+  const [categoryList, setCategoryList] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     checkAuthenticate();
@@ -42,32 +52,57 @@ export default function Index() {
   };
 
   const getCategoryList = async () => {
+    setLoading(true);
     const userProfile = await client.getUserDetails();
 
     const { data, error } = await supabase
       .from("category")
-      .select("*")
+      .select("*,categoryItems(*)")
       .eq("created_by", userProfile.email);
 
-    // console.log("Data: ", data);
+    console.log("Data: ", data);
+
+    setCategoryList(data);
+    data && setLoading(false);
   };
 
   return (
-    <View>
-      <View
-        style={{
-          padding: 20,
-          backgroundColor: Colors.PRIMARY,
-          height: 170,
-        }}
+    <View
+      style={{
+        flex: 1,
+      }}
+    >
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            onRefresh={() => getCategoryList()}
+            refreshing={loading}
+          />
+        }
       >
-        <Header />
+        <View
+          style={{
+            padding: 20,
+            backgroundColor: Colors.PRIMARY,
+            height: 170,
+          }}
+        >
+          <Header />
+        </View>
+        <View
+          style={{
+            padding: 20,
+            marginTop: -100,
+          }}
+        >
+          <CircularChart />
 
-        <CircularChart />
-      </View>
-      <View style={styles.addBtnContainer}>
+          <CategoryList categoryList={categoryList} />
+        </View>
+      </ScrollView>
+      <Link style={styles.addBtnContainer} href={"/add-new-category"}>
         <Ionicons name="add-circle" size={64} color={Colors.PRIMARY} />
-      </View>
+      </Link>
     </View>
   );
 }
@@ -78,7 +113,7 @@ const styles = StyleSheet.create({
   },
   addBtnContainer: {
     position: "absolute",
-    bottom: 16,
-    right: 16,
+    bottom: 15,
+    right: 15,
   },
 });

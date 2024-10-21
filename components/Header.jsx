@@ -49,7 +49,7 @@ export default function Header() {
             style={{
               color: Colors.WHITE,
               fontSize: 15,
-              fontFamily: "outfit-regular",
+              fontFamily: "outfit",
             }}
           >
             Welcome
